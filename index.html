@@ -1,54 +1,65 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <title>Intranet – Mitarbeiterportal Bildungsinstitution</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+      Intranet – Mitarbeiterportal
+      Author: Lucas
+      Version: 1.0
+      Description: Startseite für Mitarbeitende mit Dark/Light-Mode.
+    -->
 
-    <!-- Basis-Design mit CSS-Variablen -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Intranet – Mitarbeiterportal</title>
+
     <style>
+        /* ========= Farb- und Layout-Variablen (Dark ist Default) ========= */
         :root {
-            --bg: #0f172a;
-            --bg-elevated: #020617;
-            --bg-elevated-subtle: #111827;
-            --accent: #38bdf8;
-            --accent-soft: rgba(56, 189, 248, 0.12);
-            --accent-strong: #0ea5e9;
-            --accent-gradient: linear-gradient(135deg, #38bdf8, #6366f1);
+            --bg: #020617;
+            --bg-soft: radial-gradient(circle at top, #111827, #020617 60%);
+            --bg-card: #020617;
+            --bg-chip: rgba(15, 23, 42, 0.9);
+
             --text: #e5e7eb;
             --text-soft: #9ca3af;
-            --border-subtle: rgba(148, 163, 184, 0.25);
-            --danger: #f97373;
-            --warning: #eab308;
+
+            --border-subtle: rgba(148, 163, 184, 0.45);
+
+            --accent: #38bdf8;
+            --accent-strong: #0ea5e9;
+            --accent-soft: rgba(56, 189, 248, 0.16);
+            --accent-gradient: linear-gradient(135deg, #38bdf8, #6366f1);
+
             --ok: #4ade80;
-            --card-radius: 18px;
-            --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
-            --transition-fast: 150ms ease-out;
-            --transition-med: 220ms ease-in-out;
+            --warning: #eab308;
+
+            --radius-card: 18px;
+            --shadow-card: 0 18px 45px rgba(15, 23, 42, 0.85);
         }
 
-        /* Light Mode */
+        /* Light Mode – überschreibt nur das Nötigste */
         :root[data-theme="light"] {
             --bg: #f3f4f6;
-            --bg-elevated: #ffffff;
-            --bg-elevated-subtle: #f9fafb;
-            --accent-soft: rgba(56, 189, 248, 0.15);
+            --bg-soft: radial-gradient(circle at top, #e5e7eb, #f9fafb 60%);
+            --bg-card: #ffffff;
+            --bg-chip: #ffffff;
+
             --text: #111827;
             --text-soft: #6b7280;
+
             --border-subtle: rgba(209, 213, 219, 0.9);
-            --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.12);
+            --shadow-card: 0 18px 45px rgba(148, 163, 184, 0.3);
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        /* ========= Grundlayout ========= */
+
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: radial-gradient(circle at top, #1e293b, #020617 55%);
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            background: var(--bg-soft);
             color: var(--text);
-            min-height: 100vh;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -62,29 +73,29 @@
             flex: 1;
             display: flex;
             justify-content: center;
-            padding: 1.25rem;
+            padding: 1.2rem;
         }
 
         .app-inner {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1080px;
         }
 
-        /* HEADER */
+        /* ========= Header (Logo, Datum, Theme, User) ========= */
 
         header {
             display: flex;
             justify-content: center;
-            padding: 0.75rem 1.25rem 0.25rem;
+            padding: 0.75rem 1.25rem 0.3rem;
         }
 
         .header-inner {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1080px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         .brand {
@@ -99,22 +110,24 @@
             border-radius: 999px;
             background: conic-gradient(from 220deg, #38bdf8, #6366f1, #22c55e, #38bdf8);
             position: relative;
-            box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.6),
-                        0 18px 40px rgba(56, 189, 248, 0.45);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #0b1120;
+            box-shadow:
+                0 0 0 2px rgba(15, 23, 42, 0.6),
+                0 18px 40px rgba(56, 189, 248, 0.55);
             font-weight: 800;
-            font-size: 1.15rem;
+            color: #0b1120;
+            font-size: 1.05rem;
         }
 
         .brand-logo::after {
+            /* innerer Kreis für „Glas-Effekt“ */
             content: "";
             position: absolute;
             inset: 3px;
             border-radius: inherit;
-            background: radial-gradient(circle at 30% 0, #e0f2fe, #f9fafb 45%, #e5e7eb 60%);
+            background: radial-gradient(circle at 30% 0, #e0f2fe, #f9fafb 45%, #e5e7eb 65%);
         }
 
         .brand-logo span {
@@ -123,7 +136,7 @@
         }
 
         .brand-text-title {
-            font-size: 1.07rem;
+            font-size: 1.02rem;
             font-weight: 600;
             letter-spacing: 0.02em;
         }
@@ -133,67 +146,59 @@
             color: var(--text-soft);
         }
 
-        .header-actions {
+        .header-right {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.6rem;
         }
 
         .pill {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.6rem;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.5);
-            color: var(--text-soft);
             display: inline-flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.35rem;
+            padding: 0.28rem 0.8rem;
+            border-radius: 999px;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-chip);
+            font-size: 0.78rem;
+            color: var(--text-soft);
         }
 
         .pill-dot {
             width: 7px;
             height: 7px;
-            border-radius: 50%;
-            background: #22c55e;
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+            border-radius: 999px;
+            background: var(--ok);
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
         }
 
         .theme-toggle {
             border-radius: 999px;
             border: 1px solid var(--border-subtle);
-            background: rgba(15, 23, 42, 0.6);
+            background: var(--bg-chip);
             color: var(--text-soft);
-            padding: 0.3rem 0.7rem;
-            font-size: 0.8rem;
-            display: flex;
+            padding: 0.3rem 0.85rem;
+            font-size: 0.78rem;
+            display: inline-flex;
             align-items: center;
             gap: 0.4rem;
             cursor: pointer;
-            transition: background var(--transition-med), transform var(--transition-fast), box-shadow var(--transition-fast);
-        }
-
-        :root[data-theme="light"] .theme-toggle {
-            background: #ffffff;
+            transition: transform 150ms ease-out, box-shadow 150ms ease-out;
         }
 
         .theme-toggle:hover {
             transform: translateY(-1px);
-            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.4);
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.7);
         }
 
         .user-chip {
             display: flex;
             align-items: center;
-            gap: 0.55rem;
-            padding: 0.25rem 0.6rem;
+            gap: 0.5rem;
+            padding: 0.28rem 0.8rem;
             border-radius: 999px;
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(148, 163, 184, 0.4);
-            cursor: default;
-        }
-
-        :root[data-theme="light"] .user-chip {
-            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-chip);
         }
 
         .user-avatar {
@@ -204,12 +209,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
         }
 
         .user-name {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
         }
 
         .user-role {
@@ -217,82 +222,51 @@
             color: var(--text-soft);
         }
 
-        /* HERO + MAIN LAYOUT */
-
-        .hero-and-main {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            margin-top: 0.35rem;
-        }
+        /* ========= Hero (Begrüssung + Call-to-Actions) ========= */
 
         .hero {
-            background: linear-gradient(120deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.92)),
-                        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.22), transparent 55%);
-            border-radius: 22px;
-            padding: 1.1rem 1.2rem;
-            border: 1px solid rgba(148, 163, 184, 0.4);
-            box-shadow: var(--shadow-soft);
-            position: relative;
-            overflow: hidden;
+            margin-top: 0.6rem;
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.2rem 1.3rem;
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-card);
         }
 
-        :root[data-theme="light"] .hero {
-            background: linear-gradient(120deg, #ffffff, #f9fafb);
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 2.5fr) minmax(0, 1.8fr);
-            gap: 1.5rem;
-            align-items: stretch;
-        }
-
-        .hero-left {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-intro-line {
+        .hero-topline {
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
-            font-size: 0.78rem;
+            gap: 0.4rem;
             padding: 0.2rem 0.6rem;
             border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.55);
-            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-chip);
+            font-size: 0.78rem;
             color: var(--text-soft);
-            align-self: flex-start;
         }
 
-        :root[data-theme="light"] .hero-intro-line {
-            background: #f9fafb;
-        }
-
-        .hero-intro-dot {
+        .hero-dot {
             width: 7px;
             height: 7px;
-            border-radius: 50%;
-            background: #22c55e;
+            border-radius: 999px;
+            background: var(--ok);
         }
 
         .hero-title {
-            font-size: clamp(1.45rem, 1.2rem + 1vw, 1.85rem);
+            margin-top: 0.6rem;
+            font-size: clamp(1.7rem, 1.3rem + 1vw, 1.95rem);
             font-weight: 650;
-            letter-spacing: 0.015em;
         }
 
         .hero-subline {
-            font-size: 0.9rem;
+            margin-top: 0.35rem;
+            font-size: 0.95rem;
             color: var(--text-soft);
             max-width: 36rem;
         }
 
-        .hero-quick-actions {
+        .hero-actions {
+            margin-top: 0.9rem;
             display: flex;
             flex-wrap: wrap;
             gap: 0.6rem;
@@ -302,235 +276,59 @@
             border-radius: 999px;
             padding: 0.45rem 0.9rem;
             border: 1px solid var(--border-subtle);
+            background: var(--bg-chip);
+            color: var(--text);
             font-size: 0.8rem;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.45rem;
             cursor: pointer;
-            background: rgba(15, 23, 42, 0.88);
-            color: var(--text);
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-med), border-color var(--transition-fast);
+            transition: transform 150ms ease-out, box-shadow 150ms ease-out, background 180ms ease-out;
         }
 
-        :root[data-theme="light"] .btn {
-            background: #ffffff;
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.7);
         }
 
         .btn-primary {
             background-image: var(--accent-gradient);
             border-color: transparent;
             color: #0b1120;
-            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.6);
         }
 
-        .btn-primary span.btn-icon {
-            font-size: 1rem;
-        }
-
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.6);
-            border-color: rgba(148, 163, 184, 0.8);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 16px 40px rgba(56, 189, 248, 0.7);
-        }
-
-        .hero-meta-row {
+        .hero-meta {
+            margin-top: 0.7rem;
+            font-size: 0.78rem;
+            color: var(--text-soft);
             display: flex;
             flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-top: 0.4rem;
-            font-size: 0.75rem;
-            color: var(--text-soft);
+            gap: 0.8rem;
         }
 
-        .hero-meta-item {
+        .hero-meta span {
             display: inline-flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.25rem;
         }
 
-        .hero-meta-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: #22c55e;
-        }
+        /* ========= Main-Grid (2 Spalten) ========= */
 
-        .hero-right {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .hero-widget {
-            background: rgba(15, 23, 42, 0.82);
-            border-radius: 18px;
-            border: 1px solid rgba(148, 163, 184, 0.6);
-            padding: 0.75rem 0.85rem 0.8rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.7rem;
-        }
-
-        :root[data-theme="light"] .hero-widget {
-            background: #ffffff;
-        }
-
-        .hero-widget-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: var(--text-soft);
-        }
-
-        .hero-widget-title {
-            font-size: 0.78rem;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-        }
-
-        .hero-clock {
-            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            font-size: 0.95rem;
-        }
-
-        .hero-greeting-line {
-            font-size: 0.9rem;
-        }
-
-        .hero-greeting-line strong {
-            font-weight: 600;
-        }
-
-        .hero-grid-quick {
+        .layout-grid {
+            margin-top: 1rem;
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.45rem;
-            font-size: 0.76rem;
-        }
-
-        .badge-tiny {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            padding: 0.12rem 0.45rem;
-            border-radius: 999px;
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(148, 163, 184, 0.5);
-            font-size: 0.7rem;
-            color: var(--text-soft);
-        }
-
-        :root[data-theme="light"] .badge-tiny {
-            background: #f9fafb;
-        }
-
-        .badge-dot-warning {
-            width: 7px;
-            height: 7px;
-            border-radius: 999px;
-            background: var(--warning);
-        }
-
-        .badge-dot-ok {
-            width: 7px;
-            height: 7px;
-            border-radius: 999px;
-            background: var(--ok);
-        }
-
-        .hero-widget-progression {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-            font-size: 0.75rem;
-        }
-
-        .progress-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.65rem;
-        }
-
-        .progress-label {
-            color: var(--text-soft);
-        }
-
-        .progress-label strong {
-            color: var(--text);
-        }
-
-        .progress-meta {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            font-size: 0.7rem;
-            opacity: 0.9;
-        }
-
-        .progress-bar {
-            height: 5px;
-            border-radius: 999px;
-            background: rgba(51, 65, 85, 0.85);
-            overflow: hidden;
-            position: relative;
-        }
-
-        :root[data-theme="light"] .progress-bar {
-            background: #e5e7eb;
-        }
-
-        .progress-fill {
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background-image: linear-gradient(90deg, #22c55e, #38bdf8);
-            transform-origin: left;
-            transform: scaleX(0.76);
-        }
-
-        .hero-orbit {
-            position: absolute;
-            inset: -80%;
-            background:
-                radial-gradient(circle at 80% 0, rgba(129, 140, 248, 0.15), transparent 52%),
-                radial-gradient(circle at 0 100%, rgba(96, 165, 250, 0.13), transparent 40%);
-            opacity: 0.7;
-            pointer-events: none;
-            mix-blend-mode: screen;
-        }
-
-        /* LAYOUT: SIDEBAR + GRID */
-
-        .layout-main {
-            display: grid;
-            grid-template-columns: minmax(0, 0.95fr) minmax(0, 2.4fr);
-            gap: 1.25rem;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+            gap: 1rem;
             align-items: flex-start;
         }
 
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-        }
-
         .card {
-            background: linear-gradient(145deg, var(--bg-elevated), var(--bg-elevated-subtle));
-            border-radius: var(--card-radius);
+            background: var(--bg-card);
+            border-radius: var(--radius-card);
+            padding: 0.9rem 1rem;
             border: 1px solid var(--border-subtle);
-            padding: 0.9rem 0.95rem;
-            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.65);
-        }
-
-        :root[data-theme="light"] .card {
-            background: #ffffff;
-            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+            box-shadow: var(--shadow-card);
         }
 
         .card-header {
@@ -552,32 +350,29 @@
             font-size: 0.7rem;
             border-radius: 999px;
             padding: 0.12rem 0.5rem;
-            border: 1px solid rgba(148, 163, 184, 0.6);
+            border: 1px solid var(--border-subtle);
             color: var(--text-soft);
         }
 
+        /* Suche + Schnellzugriff */
+
         .search-input-wrapper {
             position: relative;
-            margin-bottom: 0.65rem;
         }
 
         .search-input {
             width: 100%;
             border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.6);
-            background: rgba(15, 23, 42, 0.85);
-            padding: 0.5rem 2.2rem 0.5rem 0.9rem;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-chip);
+            padding: 0.5rem 2.1rem 0.5rem 0.85rem;
             font-size: 0.8rem;
             color: var(--text);
             outline: none;
         }
 
-        :root[data-theme="light"] .search-input {
-            background: #f9fafb;
-        }
-
         .search-input::placeholder {
-            color: rgba(148, 163, 184, 0.8);
+            color: var(--text-soft);
         }
 
         .search-icon {
@@ -586,284 +381,192 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 0.9rem;
-            color: rgba(148, 163, 184, 0.9);
+            color: var(--text-soft);
         }
 
         .pill-row {
+            margin-top: 0.5rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 0.35rem;
-            margin-bottom: 0.4rem;
+            gap: 0.4rem;
         }
 
         .pill-link {
             border-radius: 999px;
-            padding: 0.14rem 0.6rem;
+            padding: 0.16rem 0.6rem;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-chip);
             font-size: 0.7rem;
-            border: 1px solid rgba(148, 163, 184, 0.6);
             color: var(--accent-strong);
-            background: rgba(15, 23, 42, 0.8);
             cursor: pointer;
-            transition: background var(--transition-med), transform var(--transition-fast);
         }
 
-        :root[data-theme="light"] .pill-link {
-            background: #f9fafb;
-        }
-
-        .pill-link:hover {
-            background: var(--accent-soft);
-            transform: translateY(-1px);
-        }
+        /* Kernsysteme-Liste */
 
         .link-list {
             list-style: none;
             padding: 0;
-            margin: 0.35rem 0 0;
+            margin: 0.5rem 0 0;
             display: flex;
             flex-direction: column;
             gap: 0.4rem;
         }
 
-        .link-list li a {
-            font-size: 0.78rem;
-            color: var(--text-soft);
+        .link-list a {
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            padding: 0.3rem 0.4rem;
-            border-radius: 10px;
-            transition: background var(--transition-med), color var(--transition-med), transform var(--transition-fast);
-        }
-
-        .link-list li a span.label {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .link-list li a span.badge {
-            font-size: 0.68rem;
-            padding: 0.05rem 0.4rem;
-            border-radius: 999px;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent-strong);
-        }
-
-        .link-list li a:hover {
-            background: rgba(15, 23, 42, 0.85);
-            color: var(--text);
-            transform: translateY(-1px);
-        }
-
-        :root[data-theme="light"] .link-list li a:hover {
-            background: #eef2ff;
-        }
-
-        .status-list {
-            list-style: none;
-            padding: 0;
-            margin: 0.1rem 0 0;
+            color: var(--text-soft);
             display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.35rem 0.45rem;
+            border-radius: 10px;
             font-size: 0.8rem;
         }
 
-        .status-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
+        .link-list a:hover {
+            background: var(--accent-soft);
+            color: var(--text);
         }
 
-        .status-main {
+        .badge {
+            font-size: 0.68rem;
+            border-radius: 999px;
+            padding: 0.05rem 0.4rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--accent-strong);
+        }
+
+        /* Today & News */
+
+        .hero-widget {
+            background: var(--bg-card);
+            border-radius: 14px;
+            border: 1px solid var(--border-subtle);
+            padding: 0.7rem 0.8rem;
             display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            font-size: 0.8rem;
+        }
+
+        .hero-widget-head {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.45rem;
+            color: var(--text-soft);
+            font-size: 0.78rem;
+        }
+
+        .hero-clock {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+        }
+
+        .progress-bar {
+            position: relative;
+            margin-top: 0.4rem;
+            height: 5px;
+            border-radius: 999px;
+            background: rgba(30, 64, 175, 0.55);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background-image: linear-gradient(90deg, #22c55e, #38bdf8);
+            transform-origin: left;
+            transform: scaleX(0.76); /* 76 % */
+        }
+
+        .news-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.6rem 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+        }
+
+        .news-item {
+            padding: 0.4rem 0.45rem;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .news-item:hover {
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        :root[data-theme="light"] .news-item:hover {
+            background: #e5edff;
+        }
+
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.4rem;
+        }
+
+        .news-title {
+            font-weight: 550;
+        }
+
+        .news-meta {
+            font-size: 0.7rem;
+            color: var(--text-soft);
+            white-space: nowrap;
+        }
+
+        .news-tags {
+            margin-top: 0.1rem;
+            font-size: 0.7rem;
+            color: var(--text-soft);
+        }
+
+        .status-row {
+            margin-top: 0.6rem;
+            font-size: 0.75rem;
+            color: var(--text-soft);
         }
 
         .status-dot {
             width: 8px;
             height: 8px;
             border-radius: 999px;
-        }
-
-        .status-dot.ok {
             background: var(--ok);
+            display: inline-block;
+            margin-right: 0.25rem;
         }
 
         .status-dot.warn {
             background: var(--warning);
         }
 
-        .status-label {
-            color: var(--text-soft);
-        }
-
-        .status-meta {
-            font-size: 0.72rem;
-            opacity: 0.85;
-        }
-
-        .small-note {
-            margin-top: 0.5rem;
-            font-size: 0.7rem;
-            color: var(--text-soft);
-        }
-
-        /* MAIN GRID (NEWS, TERMINE, ETC.) */
-
-        .grid-main {
-            display: grid;
-            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
-            gap: 1rem;
-        }
-
-        .card-body {
-            font-size: 0.8rem;
-        }
-
-        .news-list,
-        .event-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.55rem;
-        }
-
-        .news-item,
-        .event-item {
-            padding: 0.45rem 0.45rem;
-            border-radius: 12px;
-            transition: background var(--transition-med), transform var(--transition-fast);
-            cursor: pointer;
-        }
-
-        .news-item:hover,
-        .event-item:hover {
-            background: rgba(15, 23, 42, 0.85);
-            transform: translateY(-1px);
-        }
-
-        :root[data-theme="light"] .news-item:hover,
-        :root[data-theme="light"] .event-item:hover {
-            background: #f3f4ff;
-        }
-
-        .news-header-line,
-        .event-header-line {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: 0.75rem;
-        }
-
-        .news-title,
-        .event-title {
-            font-size: 0.82rem;
-            font-weight: 550;
-        }
-
-        .news-meta,
-        .event-meta {
-            font-size: 0.7rem;
-            color: var(--text-soft);
-            white-space: nowrap;
-        }
-
-        .news-tags,
-        .event-tags {
-            margin-top: 0.1rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.25rem;
-            font-size: 0.7rem;
-        }
-
-        .tag {
-            padding: 0.05rem 0.4rem;
-            border-radius: 999px;
-            background: rgba(30, 64, 175, 0.6);
-            color: #e0f2fe;
-        }
-
-        .tag-soft {
-            background: rgba(148, 163, 184, 0.2);
-            color: var(--text-soft);
-        }
-
-        .tiny-separator {
-            margin: 0.4rem 0;
-            height: 1px;
-            background: radial-gradient(circle, rgba(148, 163, 184, 0.4) 0, transparent 65%);
-            opacity: 0.7;
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.55rem;
-        }
-
-        .tool-tile {
-            border-radius: 12px;
-            border: 1px solid rgba(148, 163, 184, 0.55);
-            padding: 0.5rem 0.6rem;
-            font-size: 0.78rem;
-            background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 60%);
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            gap: 0.18rem;
-            transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-med);
-        }
-
-        .tool-tile-title {
-            font-weight: 550;
-        }
-
-        .tool-tile-sub {
-            font-size: 0.72rem;
-            color: var(--text-soft);
-        }
-
-        .tool-tile:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(15, 23, 42, 0.7);
-            border-color: var(--accent-strong);
-            background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 62%);
-        }
-
-        :root[data-theme="light"] .tool-tile:hover {
-            box-shadow: 0 12px 25px rgba(15, 23, 42, 0.15);
-        }
+        /* Footer */
 
         .footer {
-            padding: 0.3rem 1.25rem 1rem;
+            padding: 0.6rem 1.25rem 1rem;
             display: flex;
             justify-content: center;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             color: var(--text-soft);
         }
 
         .footer-inner {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1080px;
             display: flex;
             justify-content: space-between;
-            gap: 0.75rem;
-            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
         }
 
         .footer-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
         .footer-links a {
@@ -875,44 +578,34 @@
             text-decoration: underline;
         }
 
-        /* RESPONSIVE */
+        /* ========= Responsive Anpassungen ========= */
 
-        @media (max-width: 960px) {
-            .hero-grid {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .layout-main {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .grid-main {
-                grid-template-columns: minmax(0, 1fr);
-            }
-        }
-
-        @media (max-width: 720px) {
+        @media (max-width: 900px) {
             .header-inner {
                 flex-direction: column;
                 align-items: flex-start;
             }
 
-            .header-actions {
-                width: 100%;
-                justify-content: space-between;
+            .header-right {
+                align-self: stretch;
+                justify-content: flex-end;
             }
 
-            .hero {
-                padding: 0.9rem 0.9rem;
+            .layout-grid {
+                grid-template-columns: minmax(0, 1fr);
             }
         }
 
-        @media (max-width: 480px) {
-            .tools-grid {
-                grid-template-columns: minmax(0, 1fr);
+        @media (max-width: 600px) {
+            .app-main {
+                padding-inline: 0.8rem;
             }
 
-            .hero-quick-actions {
+            .hero {
+                padding-inline: 1rem;
+            }
+
+            .hero-actions {
                 flex-direction: column;
                 align-items: stretch;
             }
@@ -923,10 +616,9 @@
         }
     </style>
 </head>
-
 <body>
 <div class="app-shell">
-    <!-- HEADER -->
+    <!-- ======= Header: Logo, Titel, Datum, Theme-Toggle, Benutzer ======= -->
     <header>
         <div class="header-inner">
             <div class="brand">
@@ -939,10 +631,10 @@
                 </div>
             </div>
 
-            <div class="header-actions">
+            <div class="header-right">
                 <div class="pill">
                     <span class="pill-dot"></span>
-                    <span id="header-date">Donnerstag · 20. November 2025</span>
+                    <span id="headerDate">–</span>
                 </div>
 
                 <button class="theme-toggle" type="button" id="themeToggle" aria-label="Darstellung wechseln">
@@ -961,398 +653,240 @@
         </div>
     </header>
 
-    <!-- MAIN -->
+    <!-- ======= Hauptbereich ======= -->
     <main class="app-main">
         <div class="app-inner">
-            <div class="hero-and-main">
-                <!-- HERO -->
-                <section class="hero" aria-label="Übersicht">
-                    <div class="hero-orbit" aria-hidden="true"></div>
 
-                    <div class="hero-grid">
-                        <!-- Hero Left -->
-                        <div class="hero-left">
-                            <div class="hero-intro-line">
-                                <span class="hero-intro-dot"></span>
-                                <span id="heroGreeting">Guten Morgen, Lucas</span>
-                            </div>
+            <!-- Hero / Begrüssung -->
+            <section class="hero" aria-label="Übersicht">
+                <div class="hero-topline">
+                    <span class="hero-dot"></span>
+                    <span id="heroGreetingLine">Guten Tag, Lucas</span>
+                </div>
 
-                            <h1 class="hero-title">
-                                Was steht heute für dich an?
-                            </h1>
+                <h1 class="hero-title">Was steht heute für dich an?</h1>
 
-                            <p class="hero-subline">
-                                Dein Startpunkt für Lehre, Administration und interne Kommunikation. 
-                                Alle wichtigen Systeme, Termine und Meldungen an einem Ort – klar, schnell, zuverlässig.
-                            </p>
+                <p class="hero-subline">
+                    Dein Startpunkt für Lehre, Administration und interne Kommunikation.
+                    Alle wichtigen Systeme, Termine und Meldungen an einem Ort – klar, schnell, zuverlässig.
+                </p>
 
-                            <div class="hero-quick-actions">
-                                <button class="btn btn-primary" type="button">
-                                    <span class="btn-icon">➕</span>
-                                    <span>Neue Noten erfassen</span>
-                                </button>
-                                <button class="btn" type="button">
-                                    <span>📅</span>
-                                    <span>Heute im Stundenplan</span>
-                                </button>
-                                <button class="btn" type="button">
-                                    <span>💬</span>
-                                    <span>Mitteilungen an Studierende</span>
-                                </button>
-                            </div>
+                <div class="hero-actions">
+                    <button class="btn btn-primary" type="button">
+                        <span>➕</span>
+                        <span>Neue Noten erfassen</span>
+                    </button>
+                    <button class="btn" type="button">
+                        <span>📅</span>
+                        <span>Heute im Stundenplan</span>
+                    </button>
+                    <button class="btn" type="button">
+                        <span>💬</span>
+                        <span>Mitteilungen an Studierende</span>
+                    </button>
+                </div>
 
-                            <div class="hero-meta-row">
-                                <div class="hero-meta-item">
-                                    <span class="hero-meta-dot"></span>
-                                    <span>Systemstatus: Alles im grünen Bereich</span>
-                                </div>
-                                <div class="hero-meta-item">
-                                    <span>⚡ 3 anstehende Fristen</span>
-                                </div>
-                                <div class="hero-meta-item">
-                                    <span>📂 2 offene IT-Tickets</span>
-                                </div>
-                            </div>
+                <div class="hero-meta">
+                    <span><span class="status-dot"></span>Systemstatus: Alles im grünen Bereich</span>
+                    <span>⚡ 3 anstehende Fristen</span>
+                    <span>📂 2 offene IT-Tickets</span>
+                </div>
+            </section>
+
+            <!-- Zwei-Spalten-Grid: Links Navigation, rechts Heute & News -->
+            <section class="layout-grid">
+                <!-- Linke Spalte -->
+                <section class="card" aria-labelledby="searchTitle">
+                    <div class="card-header">
+                        <h2 class="card-title" id="searchTitle">Suche &amp; Schnellzugriff</h2>
+                        <div class="card-tag">⌘ / Ctrl + K</div>
+                    </div>
+
+                    <div class="search-input-wrapper">
+                        <input
+                            class="search-input"
+                            type="search"
+                            placeholder="Nach Kurs, Person oder Dokument suchen …"
+                            aria-label="Intranet durchsuchen">
+                        <span class="search-icon">⌕</span>
+                    </div>
+
+                    <div class="pill-row" aria-label="Beliebte Suchen">
+                        <button class="pill-link" type="button">Stundenplan</button>
+                        <button class="pill-link" type="button">Notenübersicht</button>
+                        <button class="pill-link" type="button">Raumbelegung</button>
+                        <button class="pill-link" type="button">IT-Support</button>
+                    </div>
+
+                    <div class="card-header" style="margin-top: 1rem;">
+                        <h2 class="card-title">Kernsysteme</h2>
+                        <div class="card-tag">Direkte Links</div>
+                    </div>
+
+                    <ul class="link-list">
+                        <li>
+                            <a href="#" target="_blank" rel="noopener">
+                                <span>📚 LMS – Lernplattform</span>
+                                <span class="badge">Täglich</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank" rel="noopener">
+                                <span>🧮 Noten- &amp; Prüfungsverwaltung</span>
+                                <span class="badge">Prüfungen</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank" rel="noopener">
+                                <span>📆 Stundenplan-Portal</span>
+                                <span class="badge">Live</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank" rel="noopener">
+                                <span>💼 HR &amp; Absenzen</span>
+                                <span class="badge">Personal</span>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Rechte Spalte -->
+                <section class="card" aria-labelledby="todayTitle">
+                    <div class="card-header">
+                        <h2 class="card-title" id="todayTitle">Heute an der Akademie</h2>
+                        <div class="card-tag" id="cardDayLabel">Heute</div>
+                    </div>
+
+                    <div class="hero-widget" aria-label="Tagesüberblick">
+                        <div class="hero-widget-head">
+                            <span id="heroGreetingShort">Guten Tag</span>
+                            <span class="hero-clock" id="heroClock">--:--</span>
+                        </div>
+                        <div>
+                            2 Lektionen, 1 Sitzung, 1 Prüfung heute.
                         </div>
 
-                        <!-- Hero Right -->
-                        <aside class="hero-right">
-                            <div class="hero-widget" aria-label="Tagesübersicht">
-                                <div class="hero-widget-header">
-                                    <div class="hero-widget-title">Heute an der Akademie</div>
-                                    <div class="hero-clock" id="heroClock">08:24</div>
-                                </div>
-
-                                <div class="hero-greeting-line">
-                                    <strong id="heroGreetingShort">Guten Morgen</strong> – 2 Lektionen, 1 Sitzung, 1 Prüfung heute.
-                                </div>
-
-                                <div class="hero-grid-quick" aria-hidden="false">
-                                    <div>
-                                        <div class="badge-tiny">
-                                            <span class="badge-dot-warning"></span>
-                                            <span>Abgabe Projektarbeit MI23</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="badge-tiny">
-                                            <span class="badge-dot-ok"></span>
-                                            <span>Sprechstunde 15:30–16:00</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="hero-widget-progression">
-                                    <div class="progress-row">
-                                        <div class="progress-label">
-                                            <strong>Herbstsemester</strong><br>
-                                            <span>Leistungsnachweise erfasst</span>
-                                        </div>
-                                        <div class="progress-meta">76&nbsp;%</div>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill"></div>
-                                    </div>
-                                </div>
+                        <div>
+                            <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:0.4rem;">
+                                <span>Herbstsemester – Leistungsnachweise erfasst</span>
+                                <span>76&nbsp;%</span>
                             </div>
-                        </aside>
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="news-list" aria-label="News für Mitarbeitende">
+                        <li class="news-item">
+                            <div class="news-header">
+                                <div class="news-title">Neue Richtlinie für hybride Prüfungen</div>
+                                <div class="news-meta">Veröffentlicht: 18. Nov</div>
+                            </div>
+                            <div class="news-tags">Prüfungen · Dozierende</div>
+                        </li>
+
+                        <li class="news-item">
+                            <div class="news-header">
+                                <div class="news-title">Upgrade des WLANs auf dem Campus abgeschlossen</div>
+                                <div class="news-meta">Veröffentlicht: 15. Nov</div>
+                            </div>
+                            <div class="news-tags">Infrastruktur · IT</div>
+                        </li>
+
+                        <li class="news-item">
+                            <div class="news-header">
+                                <div class="news-title">Weiterbildungsbudget 2026 – Einreichung bis Ende Januar</div>
+                                <div class="news-meta">Veröffentlicht: 10. Nov</div>
+                            </div>
+                            <div class="news-tags">Weiterbildung · HR</div>
+                        </li>
+                    </ul>
+
+                    <div class="status-row">
+                        <strong>IT-Systemstatus:</strong>
+                        <br>
+                        <span class="status-dot"></span>Lernplattform · Betrieb normal<br>
+                        <span class="status-dot"></span>Microsoft 365 · Keine Störung<br>
+                        <span class="status-dot warn"></span>VPN · Wartung heute 21–23 Uhr
                     </div>
                 </section>
-
-                <!-- LAYOUT: SIDEBAR + GRID -->
-                <section class="layout-main">
-                    <!-- SIDEBAR -->
-                    <aside class="sidebar">
-                        <!-- Suche / Schnellzugriff -->
-                        <section class="card" aria-labelledby="searchTitle">
-                            <div class="card-header">
-                                <h2 class="card-title" id="searchTitle">Suche &amp; Schnellzugriff</h2>
-                                <div class="card-tag">⌘ + K</div>
-                            </div>
-
-                            <div class="search-input-wrapper">
-                                <input class="search-input" type="search" placeholder="Nach Kurs, Person oder Dokument suchen …" aria-label="Intranet durchsuchen">
-                                <span class="search-icon">⌕</span>
-                            </div>
-
-                            <div class="pill-row" aria-label="Beliebte Suchen">
-                                <button class="pill-link" type="button">Stundenplan</button>
-                                <button class="pill-link" type="button">Notenübersicht</button>
-                                <button class="pill-link" type="button">Raumbelegung</button>
-                                <button class="pill-link" type="button">IT-Support</button>
-                            </div>
-                        </section>
-
-                        <!-- Wichtige Systeme -->
-                        <section class="card" aria-labelledby="systemsTitle">
-                            <div class="card-header">
-                                <h2 class="card-title" id="systemsTitle">Kernsysteme</h2>
-                                <div class="card-tag">Direkte Links</div>
-                            </div>
-
-                            <ul class="link-list">
-                                <li>
-                                    <a href="#" target="_blank" rel="noopener">
-                                        <span class="label">
-                                            <span>📚</span>
-                                            <span>LMS &ndash; Lernplattform</span>
-                                        </span>
-                                        <span class="badge">Täglich</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" rel="noopener">
-                                        <span class="label">
-                                            <span>🧮</span>
-                                            <span>Noten- &amp; Prüfungsverwaltung</span>
-                                        </span>
-                                        <span class="badge">Prüfungen</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" rel="noopener">
-                                        <span class="label">
-                                            <span>📆</span>
-                                            <span>Stundenplan-Portal</span>
-                                        </span>
-                                        <span class="badge">Live</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" rel="noopener">
-                                        <span class="label">
-                                            <span>💼</span>
-                                            <span>HR &amp; Absenzen</span>
-                                        </span>
-                                        <span class="badge">Pers.</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </section>
-
-                        <!-- IT-Status -->
-                        <section class="card" aria-labelledby="itStatusTitle">
-                            <div class="card-header">
-                                <h2 class="card-title" id="itStatusTitle">IT-Systemstatus</h2>
-                                <div class="card-tag">Aktuell</div>
-                            </div>
-
-                            <ul class="status-list">
-                                <li class="status-item">
-                                    <div class="status-main">
-                                        <span class="status-dot ok"></span>
-                                        <span class="status-label">Lernplattform</span>
-                                    </div>
-                                    <span class="status-meta">Betrieb normal</span>
-                                </li>
-                                <li class="status-item">
-                                    <div class="status-main">
-                                        <span class="status-dot ok"></span>
-                                        <span class="status-label">Microsoft 365</span>
-                                    </div>
-                                    <span class="status-meta">Keine Störung</span>
-                                </li>
-                                <li class="status-item">
-                                    <div class="status-main">
-                                        <span class="status-dot warn"></span>
-                                        <span class="status-label">VPN / Remote Access</span>
-                                    </div>
-                                    <span class="status-meta">Wartung 21–23 Uhr</span>
-                                </li>
-                            </ul>
-
-                            <p class="small-note">
-                                <strong>Hinweis:</strong> Melde technische Probleme direkt über das IT-Ticketsystem.
-                            </p>
-                        </section>
-                    </aside>
-
-                    <!-- GRID MAIN -->
-                    <section class="grid-main" aria-label="Inhalte">
-                        <!-- NEWS -->
-                        <section class="card" aria-labelledby="newsTitle">
-                            <div class="card-header">
-                                <h2 class="card-title" id="newsTitle">News für Mitarbeitende</h2>
-                                <button class="card-tag" type="button">Alle News &rsaquo;</button>
-                            </div>
-
-                            <div class="card-body">
-                                <ul class="news-list">
-                                    <li class="news-item">
-                                        <div class="news-header-line">
-                                            <div class="news-title">Neue Richtlinie für hybride Prüfungen</div>
-                                            <div class="news-meta">Veröffentlicht: 18. Nov</div>
-                                        </div>
-                                        <div class="news-tags">
-                                            <span class="tag">Prüfungen</span>
-                                            <span class="tag-soft">Dozierende</span>
-                                        </div>
-                                    </li>
-
-                                    <li class="news-item">
-                                        <div class="news-header-line">
-                                            <div class="news-title">Upgrade des WLANs auf dem Campus abgeschlossen</div>
-                                            <div class="news-meta">Veröffentlicht: 15. Nov</div>
-                                        </div>
-                                        <div class="news-tags">
-                                            <span class="tag">Infrastruktur</span>
-                                            <span class="tag-soft">IT</span>
-                                        </div>
-                                    </li>
-
-                                    <li class="news-item">
-                                        <div class="news-header-line">
-                                            <div class="news-title">Weiterbildungsbudget 2026 – Einreichung bis Ende Januar</div>
-                                            <div class="news-meta">Veröffentlicht: 10. Nov</div>
-                                        </div>
-                                        <div class="news-tags">
-                                            <span class="tag">Weiterbildung</span>
-                                            <span class="tag-soft">HR</span>
-                                        </div>
-                                    </li>
-                                </ul>
-
-                                <div class="tiny-separator"></div>
-
-                                <p class="small-note">
-                                    <strong>Tipp:</strong> Abonniere den Newsletter &bdquo;Campus intern&ldquo;, 
-                                    um neue News auch per E-Mail zu erhalten.
-                                </p>
-                            </div>
-                        </section>
-
-                        <!-- TERMINE & TOOLS -->
-                        <section class="card" aria-labelledby="eventsTitle">
-                            <div class="card-header">
-                                <h2 class="card-title" id="eventsTitle">Termine &amp; Tools</h2>
-                                <div class="card-tag">Nächste 7 Tage</div>
-                            </div>
-
-                            <div class="card-body">
-                                <ul class="event-list">
-                                    <li class="event-item">
-                                        <div class="event-header-line">
-                                            <div class="event-title">Sitzung Studiengangsleitung Wirtschaft</div>
-                                            <div class="event-meta">Heute · 13:30–15:00 · R 3.12</div>
-                                        </div>
-                                        <div class="event-tags">
-                                            <span class="tag-soft">Gremium</span>
-                                            <span class="tag-soft">Vor Ort</span>
-                                        </div>
-                                    </li>
-
-                                    <li class="event-item">
-                                        <div class="event-header-line">
-                                            <div class="event-title">Prüfung &bdquo;Netzwerke &amp; Sicherheit&ldquo; MI23</div>
-                                            <div class="event-meta">Fr, 22. Nov · 08:15–09:45 · R 2.05</div>
-                                        </div>
-                                        <div class="event-tags">
-                                            <span class="tag">Prüfung</span>
-                                            <span class="tag-soft">Informatik</span>
-                                        </div>
-                                    </li>
-
-                                    <li class="event-item">
-                                        <div class="event-header-line">
-                                            <div class="event-title">Dozierenden-Apéro &amp; Campus-Update</div>
-                                            <div class="event-meta">Mo, 25. Nov · 17:00–18:30 · Aula</div>
-                                        </div>
-                                        <div class="event-tags">
-                                            <span class="tag-soft">Community</span>
-                                        </div>
-                                    </li>
-                                </ul>
-
-                                <div class="tiny-separator"></div>
-
-                                <div class="tools-grid" aria-label="Häufig genutzte Tools">
-                                    <button class="tool-tile" type="button">
-                                        <div class="tool-tile-title">IT-Support</div>
-                                        <div class="tool-tile-sub">Ticket erfassen oder Status prüfen</div>
-                                    </button>
-                                    <button class="tool-tile" type="button">
-                                        <div class="tool-tile-title">Raum anfragen</div>
-                                        <div class="tool-tile-sub">Spezialräume &amp; Infrastruktur buchen</div>
-                                    </button>
-                                    <button class="tool-tile" type="button">
-                                        <div class="tool-tile-title">Absenzen melden</div>
-                                        <div class="tool-tile-sub">Abwesenheiten und Stellvertretung organisieren</div>
-                                    </button>
-                                    <button class="tool-tile" type="button">
-                                        <div class="tool-tile-title">Vorlagen &amp; CI</div>
-                                        <div class="tool-tile-sub">Folien, Briefpapier, Logos</div>
-                                    </button>
-                                </div>
-                            </div>
-                        </section>
-                    </section>
-                </section>
-            </div>
+            </section>
         </div>
     </main>
 
-    <!-- FOOTER -->
+    <!-- ======= Footer ======= -->
     <footer class="footer">
         <div class="footer-inner">
-            <div>
-                &copy; <span id="footerYear"></span> Akademie für Wirtschaft &amp; Informatik · Intern
-            </div>
+            <div>&copy; <span id="footerYear"></span> Akademie für Wirtschaft &amp; Informatik · Intern</div>
             <div class="footer-links">
-                <a href="#">Datenschutz</a>
-                <span>·</span>
-                <a href="#">IT-Richtlinien</a>
-                <span>·</span>
+                <a href="#">Datenschutz</a><span>·</span>
+                <a href="#">IT-Richtlinien</a><span>·</span>
                 <a href="#">Kontakt IT-Service</a>
             </div>
         </div>
     </footer>
 </div>
 
-<!-- KLEINES JS: Zeit, Begrüssung, Theme-Toggle -->
+<!-- ========= JavaScript: Datum, Uhrzeit, Begrüssung, Theme Toggle ========= -->
 <script>
     (function () {
         const root = document.documentElement;
         const themeToggle = document.getElementById("themeToggle");
         const themeIcon = document.getElementById("themeIcon");
         const themeLabel = document.getElementById("themeLabel");
+
+        const headerDate = document.getElementById("headerDate");
         const heroClock = document.getElementById("heroClock");
-        const heroGreeting = document.getElementById("heroGreeting");
+        const heroGreetingLine = document.getElementById("heroGreetingLine");
         const heroGreetingShort = document.getElementById("heroGreetingShort");
+        const cardDayLabel = document.getElementById("cardDayLabel");
         const footerYear = document.getElementById("footerYear");
 
+        /* ---- Hilfsfunktion: Datum formatiert als „Donnerstag, 20. November 2025“ ---- */
+        function formatLongDate(date) {
+            return date.toLocaleDateString("de-CH", {
+                weekday: "long",
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            });
+        }
+
+        /* ---- Uhrzeit + Begrüssung nach Tageszeit setzen ---- */
         function updateClockAndGreeting() {
             const now = new Date();
-            const hours = now.getHours().toString().padStart(2, "0");
-            const minutes = now.getMinutes().toString().padStart(2, "0");
+            const hours = String(now.getHours()).padStart(2, "0");
+            const minutes = String(now.getMinutes()).padStart(2, "0");
             heroClock.textContent = hours + ":" + minutes;
 
             let greeting = "Guten Tag";
-            if (now.getHours() < 11) {
-                greeting = "Guten Morgen";
-            } else if (now.getHours() >= 17) {
-                greeting = "Guten Abend";
-            }
+            if (now.getHours() < 11) greeting = "Guten Morgen";
+            else if (now.getHours() >= 17) greeting = "Guten Abend";
 
-            heroGreeting.textContent = greeting + ", Lucas";
+            heroGreetingLine.textContent = greeting + ", Lucas";
             heroGreetingShort.textContent = greeting;
         }
 
+        /* ---- Theme aus localStorage oder System übernehmen ---- */
         function applyStoredTheme() {
             const stored = localStorage.getItem("intranet-theme");
             if (stored === "light" || stored === "dark") {
                 root.setAttribute("data-theme", stored);
             } else {
-                // System-Preference, fallback: dark
+                // Fallback: Systempräferenz
                 const prefersDark = window.matchMedia &&
                     window.matchMedia("(prefers-color-scheme: dark)").matches;
                 root.setAttribute("data-theme", prefersDark ? "dark" : "light");
             }
-            updateThemeToggleButton();
+            updateThemeToggleLabel();
         }
 
-        function updateThemeToggleButton() {
-            const current = root.getAttribute("data-theme") || "dark";
-            if (current === "dark") {
+        /* ---- Button-Icon/Text für aktuelles Theme anpassen ---- */
+        function updateThemeToggleLabel() {
+            const mode = root.getAttribute("data-theme") || "dark";
+            if (mode === "dark") {
                 themeIcon.textContent = "🌙";
                 themeLabel.textContent = "Dark Mode";
             } else {
@@ -1361,20 +895,26 @@
             }
         }
 
+        /* ---- Theme wechseln und speichern ---- */
         function toggleTheme() {
             const current = root.getAttribute("data-theme") || "dark";
             const next = current === "dark" ? "light" : "dark";
             root.setAttribute("data-theme", next);
             localStorage.setItem("intranet-theme", next);
-            updateThemeToggleButton();
+            updateThemeToggleLabel();
         }
 
-        themeToggle.addEventListener("click", toggleTheme);
+        /* ---- Initiale Werte setzen ---- */
+        const now = new Date();
+        headerDate.textContent = formatLongDate(now);
+        cardDayLabel.textContent = "Heute";
+        footerYear.textContent = String(now.getFullYear());
 
-        footerYear.textContent = new Date().getFullYear().toString();
         applyStoredTheme();
         updateClockAndGreeting();
-        setInterval(updateClockAndGreeting, 15 * 1000);
+        setInterval(updateClockAndGreeting, 15 * 1000); // alle 15s aktualisieren
+
+        themeToggle.addEventListener("click", toggleTheme);
     })();
 </script>
 </body>
