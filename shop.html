@@ -5,47 +5,62 @@
     <title>Chocolatier Chocadies – Shop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Gleiches CSS wie auf der Login-Seite -->
     <link rel="stylesheet" href="styles.css">
+    <script src="shop.js" defer></script>
 </head>
 <body>
 
 <div class="shop-page">
     <header class="shop-header">
         <h1>Chocolatier Chocadies – Shop</h1>
-        <p>Willkommen in der Demo-Bestell-App.</p>
+        <p>Produktuebersicht aus einer JSON-Datei mit Filterfunktion.</p>
         <a href="index.html" class="link-button">Abmelden / Zurueck zum Login</a>
     </header>
 
-    <main class="product-grid">
+    <!-- Filterbereich -->
+    <section class="filter-bar">
+        <div class="filter-item">
+            <label for="searchInput">Suche (Name oder Beschreibung)</label>
+            <input type="text" id="searchInput" placeholder="z. B. Praline, Tafel, Geschenk">
+        </div>
 
-        <article class="product-card">
-            <h2>Pralinenbox Classic</h2>
-            <p>Feinste gemischte Pralinen, 16 Stueck.</p>
-            <p class="price">CHF 24.90</p>
-            <button onclick="alert('Pralinenbox Classic wurde (fiktiv) in den Warenkorb gelegt.')">
-                In den Warenkorb
-            </button>
-        </article>
+        <div class="filter-item">
+            <label for="categorySelect">Kategorie</label>
+            <select id="categorySelect">
+                <option value="alle">Alle</option>
+                <option value="Pralinen">Pralinen</option>
+                <option value="Tafel">Tafel</option>
+                <option value="Geschenkset">Geschenkset</option>
+            </select>
+        </div>
 
-        <article class="product-card">
-            <h2>Dunkle Tafel 72%</h2>
-            <p>Edle Bitterschokolade mit Kakao aus nachhaltigem Anbau.</p>
-            <p class="price">CHF 4.90</p>
-            <button onclick="alert('Dunkle Tafel 72% wurde (fiktiv) in den Warenkorb gelegt.')">
-                In den Warenkorb
-            </button>
-        </article>
+        <div class="filter-item filter-checkbox">
+            <label>
+                <input type="checkbox" id="veganOnly">
+                Nur vegane Produkte
+            </label>
+        </div>
+    </section>
 
-        <article class="product-card">
-            <h2>Geschenkset Deluxe</h2>
-            <p>Kombination aus Pralinen, Tafeln und Truffes.</p>
-            <p class="price">CHF 49.90</p>
-            <button onclick="alert('Geschenkset Deluxe wurde (fiktiv) in den Warenkorb gelegt.')">
-                In den Warenkorb
-            </button>
-        </article>
+    <!-- Statusanzeige -->
+    <p id="statusText" class="status-text">Produkte werden geladen ...</p>
 
+    <!-- Produkttabelle -->
+    <main>
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th>Produktname</th>
+                    <th>Kategorie</th>
+                    <th>Beschreibung</th>
+                    <th>Preis</th>
+                    <th>Vegan</th>
+                </tr>
+            </thead>
+            <tbody id="productTableBody">
+                <!-- Zeilen werden durch shop.js aus products.json eingefuegt -->
+            </tbody>
+        </table>
     </main>
 
     <footer class="shop-footer">
