@@ -107,7 +107,7 @@
     "id": 14,
     "name": "Pralinen Soft Caramel",
     "kategorie": "Pralinen",
-    "Beschreibung": "Weiche Caramel-Pralinen mit Rahmfuellung.",
+    "beschreibung": "Weiche Caramel-Pralinen mit Rahmfuellung.",
     "preis": 21.90,
     "vegan": false
   },
