@@ -38,5 +38,125 @@
     "beschreibung": "Kombination aus Pralinen, Tafeln und Truffes.",
     "preis": 49.90,
     "vegan": false
+  },
+  {
+    "id": 6,
+    "name": "Truffes Marc de Champagne",
+    "kategorie": "Truffes",
+    "beschreibung": "Edle Truffes mit Marc-de-Champagne-Fuellung.",
+    "preis": 18.50,
+    "vegan": false
+  },
+  {
+    "id": 7,
+    "name": "Haselnuss-Krokant Tafel",
+    "kategorie": "Tafel",
+    "beschreibung": "Milchschokolade mit knusprigem Haselnuss-Krokant.",
+    "preis": 4.50,
+    "vegan": false
+  },
+  {
+    "id": 8,
+    "name": "Zartbitter Orange Tafel",
+    "kategorie": "Tafel",
+    "beschreibung": "Dunkle Schokolade mit fruchtigen Orangennoten.",
+    "preis": 5.20,
+    "vegan": true
+  },
+  {
+    "id": 9,
+    "name": "Winter Edition – Zimt Tafel",
+    "kategorie": "Tafel",
+    "beschreibung": "Limitierte Tafelschokolade mit Zimt und Gewürznoten.",
+    "preis": 5.90,
+    "vegan": false
+  },
+  {
+    "id": 10,
+    "name": "Pralinenmischung Noir",
+    "kategorie": "Pralinen",
+    "beschreibung": "Feine dunkle Pralinen für Liebhaber intensiver Schokolade.",
+    "preis": 22.40,
+    "vegan": true
+  },
+  {
+    "id": 11,
+    "name": "Truffes Caramel Fleur de Sel",
+    "kategorie": "Truffes",
+    "beschreibung": "Handgerollte Caramel-Truffes mit Fleur de Sel.",
+    "preis": 17.90,
+    "vegan": false
+  },
+  {
+    "id": 12,
+    "name": "Geschenkset Mini",
+    "kategorie": "Geschenkset",
+    "beschreibung": "Kleine Geschenkbox für besondere Anlaesse.",
+    "preis": 19.90,
+    "vegan": false
+  },
+  {
+    "id": 13,
+    "name": "Vegane Himbeer-Tafel",
+    "kategorie": "Tafel",
+    "beschreibung": "Dunkle Schokolade mit gefriergetrockneten Himbeeren.",
+    "preis": 4.70,
+    "vegan": true
+  },
+  {
+    "id": 14,
+    "name": "Pralinen Soft Caramel",
+    "kategorie": "Pralinen",
+    "Beschreibung": "Weiche Caramel-Pralinen mit Rahmfuellung.",
+    "preis": 21.90,
+    "vegan": false
+  },
+  {
+    "id": 15,
+    "name": "Ostern Schoko-Hase",
+    "kategorie": "Saison",
+    "beschreibung": "Handgegossener Schokoladenhase aus Vollmilch.",
+    "preis": 12.50,
+    "vegan": false
+  },
+  {
+    "id": 16,
+    "name": "Weihnachtsstern Zartbitter",
+    "kategorie": "Saison",
+    "beschreibung": "Weihnachtsstern aus dunkler Schokolade.",
+    "preis": 9.90,
+    "vegan": true
+  },
+  {
+    "id": 17,
+    "name": "Tafel Kaffee Arabica",
+    "kategorie": "Tafel",
+    "beschreibung": "Zartbitterschokolade mit feiner Kaffeenote.",
+    "preis": 5.50,
+    "vegan": true
+  },
+  {
+    "id": 18,
+    "name": "Truffes Baileys",
+    "kategorie": "Truffes",
+    "beschreibung": "Truffes mit cremiger Baileysfuellung.",
+    "preis": 18.90,
+    "vegan": false
+  },
+  {
+    "id": 19,
+    "name": "Pralinen Nuss-Mix",
+    "kategorie": "Pralinen",
+    "beschreibung": "Pralinen mit Haselnuss-, Pistazien- und Mandelfuellung.",
+    "preis": 23.90,
+    "vegan": false
+  },
+  {
+    "id": 20,
+    "name": "Tafel Chili Intenso",
+    "kategorie": "Tafel",
+    "beschreibung": "Herb-schokoladige Tafel mit einer Note von Chili.",
+    "preis": 5.30,
+    "vegan": true
   }
 ]
