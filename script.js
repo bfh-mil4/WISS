@@ -1,4 +1,5 @@
-// Wird ausgefuehrt, sobald das DOM geladen ist (wegen "defer" im Script-Tag)
+// script.js
+
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("loginForm");
     const emailInput = document.getElementById("email");
@@ -6,30 +7,40 @@ document.addEventListener("DOMContentLoaded", function () {
     const captchaCheckbox = document.getElementById("captcha");
     const toast = document.getElementById("toast");
 
-    // Hilfsfunktion: Toast anzeigen
+    // Wenn kein Formular vorhanden ist (z. B. auf shop.html), nichts tun
+    if (!form) {
+        return;
+    }
+
+    // Toast-Hilfsfunktion
     function showToast(message, type = "success") {
         toast.textContent = message;
         toast.classList.remove("error", "success");
         toast.classList.add(type);
         toast.classList.add("show");
 
-        // Toast nach 3 Sekunden automatisch ausblenden
         setTimeout(function () {
             toast.classList.remove("show");
         }, 3000);
     }
 
-    // Form-Submit abfangen
     form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Verhindert das Standard-Form-Verhalten
+        event.preventDefault();
 
         const email = emailInput.value.trim();
         const password = passwordInput.value.trim();
         const captchaChecked = captchaCheckbox.checked;
 
-        // Einfache Validierung
+        // Einfache E-Mail-Validierung
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if (!email || !password) {
             showToast("Bitte E-Mail und Passwort eingeben.", "error");
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            showToast("Bitte eine gueltige E-Mail-Adresse eingeben.", "error");
             return;
         }
 
@@ -38,13 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Wenn alles ok ist: Erfolgsmeldung
+        // Erfolgreicher Login
         showToast("Login erfolgreich! Weiterleitung zur Chocadies-Bestell-App ...", "success");
 
-        // Simulierte Weiterleitung nach 1.5 Sekunden
         setTimeout(function () {
-            // Hier kann spaeter eine eigene Seite der Bestell-App eingefuegt werden,
-            // z. B. window.location.href = "shop.html";
+            // Weiterleitung auf die Shop-Seite im gleichen Ordner
             window.location.href = "shop.html";
         }, 1500);
     });
