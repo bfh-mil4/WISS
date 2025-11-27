@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Pralinenbox Classic",
+    "kategorie": "Pralinen",
+    "beschreibung": "Gemischte Pralinen, 16 Stueck.",
+    "preis": 24.90,
+    "vegan": false
+  },
+  {
+    "id": 2,
+    "name": "Pralinenbox Vegan",
+    "kategorie": "Pralinen",
+    "beschreibung": "Feine vegane Pralinen, 12 Stueck.",
+    "preis": 26.50,
+    "vegan": true
+  },
+  {
+    "id": 3,
+    "name": "Dunkle Tafel 72%",
+    "kategorie": "Tafel",
+    "beschreibung": "Edle Bitterschokolade mit 72% Kakao.",
+    "preis": 4.90,
+    "vegan": true
+  },
+  {
+    "id": 4,
+    "name": "Milchschokolade Classic",
+    "kategorie": "Tafel",
+    "beschreibung": "Feine Milchschokolade, 100g.",
+    "preis": 3.90,
+    "vegan": false
+  },
+  {
+    "id": 5,
+    "name": "Geschenkset Deluxe",
+    "kategorie": "Geschenkset",
+    "beschreibung": "Kombination aus Pralinen, Tafeln und Truffes.",
+    "preis": 49.90,
+    "vegan": false
+  }
+]
