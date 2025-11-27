@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function () {
             // Hier kann spaeter eine eigene Seite der Bestell-App eingefuegt werden,
             // z. B. window.location.href = "shop.html";
-            window.location.href = "https://www.wiss.ch";
+            window.location.href = "shop.html";
         }, 1500);
     });
 });
