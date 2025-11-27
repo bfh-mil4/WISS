@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let allProducts = [];
 
     // Produkte aus der JSON-Datei laden
-    fetch("products.json")
+    fetch("products.json?v=2")
         .then(response => {
             if (!response.ok) {
                 throw new Error("Konnte products.json nicht laden");
