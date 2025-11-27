@@ -1,921 +1,137 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="dark">
+<html lang="de">
 <head>
-    <!--
-      Intranet – Mitarbeiterportal
-      Author: Lucas
-      Version: 1.0
-      Description: Startseite für Mitarbeitende mit Dark/Light-Mode.
-    -->
-
     <meta charset="UTF-8">
+    <title>Chocolatier Chocadies – Bestell-App Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Intranet – Mitarbeiterportal</title>
-
+    <!-- optional: minimale Standard-Schrift -->
     <style>
-        /* ========= Farb- und Layout-Variablen (Dark ist Default) ========= */
-        :root {
-            --bg: #020617;
-            --bg-soft: radial-gradient(circle at top, #111827, #020617 60%);
-            --bg-card: #020617;
-            --bg-chip: rgba(15, 23, 42, 0.9);
-
-            --text: #e5e7eb;
-            --text-soft: #9ca3af;
-
-            --border-subtle: rgba(148, 163, 184, 0.45);
-
-            --accent: #38bdf8;
-            --accent-strong: #0ea5e9;
-            --accent-soft: rgba(56, 189, 248, 0.16);
-            --accent-gradient: linear-gradient(135deg, #38bdf8, #6366f1);
-
-            --ok: #4ade80;
-            --warning: #eab308;
-
-            --radius-card: 18px;
-            --shadow-card: 0 18px 45px rgba(15, 23, 42, 0.85);
-        }
-
-        /* Light Mode – überschreibt nur das Nötigste */
-        :root[data-theme="light"] {
-            --bg: #f3f4f6;
-            --bg-soft: radial-gradient(circle at top, #e5e7eb, #f9fafb 60%);
-            --bg-card: #ffffff;
-            --bg-chip: #ffffff;
-
-            --text: #111827;
-            --text-soft: #6b7280;
-
-            --border-subtle: rgba(209, 213, 219, 0.9);
-            --shadow-card: 0 18px 45px rgba(148, 163, 184, 0.3);
-        }
-
-        /* ========= Grundlayout ========= */
-
-        * { box-sizing: border-box; }
-
         body {
+            font-family: Arial, sans-serif;
+            background: #f7f3ee;
             margin: 0;
-            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-            background: var(--bg-soft);
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
+            padding: 0;
         }
 
-        .app-shell {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+        .container {
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
         }
 
-        .app-main {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            padding: 1.2rem;
+        h1 {
+            font-size: 1.4rem;
+            margin-top: 0;
         }
 
-        .app-inner {
-            width: 100%;
-            max-width: 1080px;
-        }
-
-        /* ========= Header (Logo, Datum, Theme, User) ========= */
-
-        header {
-            display: flex;
-            justify-content: center;
-            padding: 0.75rem 1.25rem 0.3rem;
-        }
-
-        .header-inner {
-            width: 100%;
-            max-width: 1080px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .brand-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 999px;
-            background: conic-gradient(from 220deg, #38bdf8, #6366f1, #22c55e, #38bdf8);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow:
-                0 0 0 2px rgba(15, 23, 42, 0.6),
-                0 18px 40px rgba(56, 189, 248, 0.55);
-            font-weight: 800;
-            color: #0b1120;
-            font-size: 1.05rem;
-        }
-
-        .brand-logo::after {
-            /* innerer Kreis für „Glas-Effekt“ */
-            content: "";
-            position: absolute;
-            inset: 3px;
-            border-radius: inherit;
-            background: radial-gradient(circle at 30% 0, #e0f2fe, #f9fafb 45%, #e5e7eb 65%);
-        }
-
-        .brand-logo span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .brand-text-title {
-            font-size: 1.02rem;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-        }
-
-        .brand-text-sub {
-            font-size: 0.78rem;
-            color: var(--text-soft);
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            padding: 0.28rem 0.8rem;
-            border-radius: 999px;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-chip);
-            font-size: 0.78rem;
-            color: var(--text-soft);
-        }
-
-        .pill-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 999px;
-            background: var(--ok);
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
-        }
-
-        .theme-toggle {
-            border-radius: 999px;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-chip);
-            color: var(--text-soft);
-            padding: 0.3rem 0.85rem;
-            font-size: 0.78rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            cursor: pointer;
-            transition: transform 150ms ease-out, box-shadow 150ms ease-out;
-        }
-
-        .theme-toggle:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.7);
-        }
-
-        .user-chip {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.28rem 0.8rem;
-            border-radius: 999px;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-chip);
-        }
-
-        .user-avatar {
-            width: 26px;
-            height: 26px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, #38bdf8, #6366f1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.82rem;
-            font-weight: 600;
-        }
-
-        .user-name {
-            font-size: 0.8rem;
-        }
-
-        .user-role {
-            font-size: 0.7rem;
-            color: var(--text-soft);
-        }
-
-        /* ========= Hero (Begrüssung + Call-to-Actions) ========= */
-
-        .hero {
-            margin-top: 0.6rem;
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 1.2rem 1.3rem;
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-card);
-        }
-
-        .hero-topline {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 999px;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-chip);
-            font-size: 0.78rem;
-            color: var(--text-soft);
-        }
-
-        .hero-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 999px;
-            background: var(--ok);
-        }
-
-        .hero-title {
-            margin-top: 0.6rem;
-            font-size: clamp(1.7rem, 1.3rem + 1vw, 1.95rem);
-            font-weight: 650;
-        }
-
-        .hero-subline {
-            margin-top: 0.35rem;
-            font-size: 0.95rem;
-            color: var(--text-soft);
-            max-width: 36rem;
-        }
-
-        .hero-actions {
-            margin-top: 0.9rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-
-        .btn {
-            border-radius: 999px;
-            padding: 0.45rem 0.9rem;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-chip);
-            color: var(--text);
-            font-size: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            cursor: pointer;
-            transition: transform 150ms ease-out, box-shadow 150ms ease-out, background 180ms ease-out;
-        }
-
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.7);
-        }
-
-        .btn-primary {
-            background-image: var(--accent-gradient);
-            border-color: transparent;
-            color: #0b1120;
-            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.6);
-        }
-
-        .hero-meta {
-            margin-top: 0.7rem;
-            font-size: 0.78rem;
-            color: var(--text-soft);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-
-        .hero-meta span {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        /* ========= Main-Grid (2 Spalten) ========= */
-
-        .layout-grid {
-            margin-top: 1rem;
-            display: grid;
-            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
-            gap: 1rem;
-            align-items: flex-start;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border-radius: var(--radius-card);
-            padding: 0.9rem 1rem;
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-card);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.6rem;
-        }
-
-        .card-title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: var(--text-soft);
-        }
-
-        .card-tag {
-            font-size: 0.7rem;
-            border-radius: 999px;
-            padding: 0.12rem 0.5rem;
-            border: 1px solid var(--border-subtle);
-            color: var(--text-soft);
-        }
-
-        /* Suche + Schnellzugriff */
-
-        .search-input-wrapper {
-            position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            border-radius: 999px;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-chip);
-            padding: 0.5rem 2.1rem 0.5rem 0.85rem;
-            font-size: 0.8rem;
-            color: var(--text);
-            outline: none;
-        }
-
-        .search-input::placeholder {
-            color: var(--text-soft);
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 0.7rem;
-            top: 50%;
-            transform: translateY(-50%);
+        .subtitle {
+            color: #666;
             font-size: 0.9rem;
-            color: var(--text-soft);
+            margin-bottom: 16px;
         }
 
-        .pill-row {
-            margin-top: 0.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
+        label {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.9rem;
         }
 
-        .pill-link {
-            border-radius: 999px;
-            padding: 0.16rem 0.6rem;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-chip);
-            font-size: 0.7rem;
-            color: var(--accent-strong);
-            cursor: pointer;
-        }
-
-        /* Kernsysteme-Liste */
-
-        .link-list {
-            list-style: none;
-            padding: 0;
-            margin: 0.5rem 0 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .link-list a {
-            text-decoration: none;
-            color: var(--text-soft);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.35rem 0.45rem;
-            border-radius: 10px;
-            font-size: 0.8rem;
-        }
-
-        .link-list a:hover {
-            background: var(--accent-soft);
-            color: var(--text);
-        }
-
-        .badge {
-            font-size: 0.68rem;
-            border-radius: 999px;
-            padding: 0.05rem 0.4rem;
-            background: rgba(56, 189, 248, 0.12);
-            color: var(--accent-strong);
-        }
-
-        /* Today & News */
-
-        .hero-widget {
-            background: var(--bg-card);
-            border-radius: 14px;
-            border: 1px solid var(--border-subtle);
-            padding: 0.7rem 0.8rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.55rem;
-            font-size: 0.8rem;
-        }
-
-        .hero-widget-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-soft);
-            font-size: 0.78rem;
-        }
-
-        .hero-clock {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
-        }
-
-        .progress-bar {
-            position: relative;
-            margin-top: 0.4rem;
-            height: 5px;
-            border-radius: 999px;
-            background: rgba(30, 64, 175, 0.55);
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background-image: linear-gradient(90deg, #22c55e, #38bdf8);
-            transform-origin: left;
-            transform: scaleX(0.76); /* 76 % */
-        }
-
-        .news-list {
-            list-style: none;
-            padding: 0;
-            margin: 0.6rem 0 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-            font-size: 0.8rem;
-        }
-
-        .news-item {
-            padding: 0.4rem 0.45rem;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .news-item:hover {
-            background: rgba(15, 23, 42, 0.9);
-        }
-
-        :root[data-theme="light"] .news-item:hover {
-            background: #e5edff;
-        }
-
-        .news-header {
-            display: flex;
-            justify-content: space-between;
-            gap: 0.4rem;
-        }
-
-        .news-title {
-            font-weight: 550;
-        }
-
-        .news-meta {
-            font-size: 0.7rem;
-            color: var(--text-soft);
-            white-space: nowrap;
-        }
-
-        .news-tags {
-            margin-top: 0.1rem;
-            font-size: 0.7rem;
-            color: var(--text-soft);
-        }
-
-        .status-row {
-            margin-top: 0.6rem;
-            font-size: 0.75rem;
-            color: var(--text-soft);
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: var(--ok);
-            display: inline-block;
-            margin-right: 0.25rem;
-        }
-
-        .status-dot.warn {
-            background: var(--warning);
-        }
-
-        /* Footer */
-
-        .footer {
-            padding: 0.6rem 1.25rem 1rem;
-            display: flex;
-            justify-content: center;
-            font-size: 0.72rem;
-            color: var(--text-soft);
-        }
-
-        .footer-inner {
+        input[type="email"],
+        input[type="password"] {
             width: 100%;
-            max-width: 1080px;
-            display: flex;
-            justify-content: space-between;
-            gap: 0.6rem;
-            flex-wrap: wrap;
+            padding: 8px;
+            margin-top: 4px;
+            box-sizing: border-box;
         }
 
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
+        .checkbox-row {
+            margin-top: 12px;
+            font-size: 0.85rem;
         }
 
-        .footer-links a {
-            color: var(--text-soft);
-            text-decoration: none;
+        button {
+            margin-top: 16px;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background: #7b3f00; /* Schoko-Farbe */
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
         }
 
-        .footer-links a:hover {
-            text-decoration: underline;
+        button:hover {
+            opacity: 0.9;
         }
 
-        /* ========= Responsive Anpassungen ========= */
-
-        @media (max-width: 900px) {
-            .header-inner {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .header-right {
-                align-self: stretch;
-                justify-content: flex-end;
-            }
-
-            .layout-grid {
-                grid-template-columns: minmax(0, 1fr);
-            }
+        /* Toast-Message */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
         }
 
-        @media (max-width: 600px) {
-            .app-main {
-                padding-inline: 0.8rem;
-            }
+        .toast.show {
+            opacity: 1;
+        }
 
-            .hero {
-                padding-inline: 1rem;
-            }
+        .toast.error {
+            background: #b00020;
+        }
 
-            .hero-actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .btn {
-                justify-content: center;
-            }
+        .toast.success {
+            background: #2e7d32;
         }
     </style>
+
+    <!-- WICHTIG: externer JavaScript-File, nicht im gleichen File wie HTML -->
+    <script src="script.js" defer></script>
 </head>
 <body>
-<div class="app-shell">
-    <!-- ======= Header: Logo, Titel, Datum, Theme-Toggle, Benutzer ======= -->
-    <header>
-        <div class="header-inner">
-            <div class="brand">
-                <div class="brand-logo" aria-hidden="true">
-                    <span>AI</span>
-                </div>
-                <div>
-                    <div class="brand-text-title">Akademie für Wirtschaft &amp; Informatik</div>
-                    <div class="brand-text-sub">Intranet · Mitarbeiterportal</div>
-                </div>
-            </div>
 
-            <div class="header-right">
-                <div class="pill">
-                    <span class="pill-dot"></span>
-                    <span id="headerDate">–</span>
-                </div>
+<div class="container">
+    <h1>Chocolatier Chocadies</h1>
+    <p class="subtitle">
+        Demo-Login zur neuen Bestell-App.
+    </p>
 
-                <button class="theme-toggle" type="button" id="themeToggle" aria-label="Darstellung wechseln">
-                    <span id="themeIcon">🌙</span>
-                    <span id="themeLabel">Dark Mode</span>
-                </button>
+    <form id="loginForm">
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" placeholder="kunde@chocadies.ch">
 
-                <div class="user-chip" aria-label="Angemeldeter Benutzer">
-                    <div class="user-avatar">LM</div>
-                    <div>
-                        <div class="user-name">Lucas Muster</div>
-                        <div class="user-role">Dozierender · Informatik</div>
-                    </div>
-                </div>
-            </div>
+        <label for="password">Passwort</label>
+        <input type="password" id="password" placeholder="Passwort eingeben">
+
+        <div class="checkbox-row">
+            <input type="checkbox" id="captcha">
+            <label for="captcha" style="display:inline;">
+                Ich bin kein Roboter (Fake-Captcha)
+            </label>
         </div>
-    </header>
 
-    <!-- ======= Hauptbereich ======= -->
-    <main class="app-main">
-        <div class="app-inner">
+        <button type="submit">Anmelden</button>
+    </form>
 
-            <!-- Hero / Begrüssung -->
-            <section class="hero" aria-label="Übersicht">
-                <div class="hero-topline">
-                    <span class="hero-dot"></span>
-                    <span id="heroGreetingLine">Guten Tag, Lucas</span>
-                </div>
-
-                <h1 class="hero-title">Was steht heute für dich an?</h1>
-
-                <p class="hero-subline">
-                    Dein Startpunkt für Lehre, Administration und interne Kommunikation.
-                    Alle wichtigen Systeme, Termine und Meldungen an einem Ort – klar, schnell, zuverlässig.
-                </p>
-
-                <div class="hero-actions">
-                    <button class="btn btn-primary" type="button">
-                        <span>➕</span>
-                        <span>Neue Noten erfassen</span>
-                    </button>
-                    <button class="btn" type="button">
-                        <span>📅</span>
-                        <span>Heute im Stundenplan</span>
-                    </button>
-                    <button class="btn" type="button">
-                        <span>💬</span>
-                        <span>Mitteilungen an Studierende</span>
-                    </button>
-                </div>
-
-                <div class="hero-meta">
-                    <span><span class="status-dot"></span>Systemstatus: Alles im grünen Bereich</span>
-                    <span>⚡ 3 anstehende Fristen</span>
-                    <span>📂 2 offene IT-Tickets</span>
-                </div>
-            </section>
-
-            <!-- Zwei-Spalten-Grid: Links Navigation, rechts Heute & News -->
-            <section class="layout-grid">
-                <!-- Linke Spalte -->
-                <section class="card" aria-labelledby="searchTitle">
-                    <div class="card-header">
-                        <h2 class="card-title" id="searchTitle">Suche &amp; Schnellzugriff</h2>
-                        <div class="card-tag">⌘ / Ctrl + K</div>
-                    </div>
-
-                    <div class="search-input-wrapper">
-                        <input
-                            class="search-input"
-                            type="search"
-                            placeholder="Nach Kurs, Person oder Dokument suchen …"
-                            aria-label="Intranet durchsuchen">
-                        <span class="search-icon">⌕</span>
-                    </div>
-
-                    <div class="pill-row" aria-label="Beliebte Suchen">
-                        <button class="pill-link" type="button">Stundenplan</button>
-                        <button class="pill-link" type="button">Notenübersicht</button>
-                        <button class="pill-link" type="button">Raumbelegung</button>
-                        <button class="pill-link" type="button">IT-Support</button>
-                    </div>
-
-                    <div class="card-header" style="margin-top: 1rem;">
-                        <h2 class="card-title">Kernsysteme</h2>
-                        <div class="card-tag">Direkte Links</div>
-                    </div>
-
-                    <ul class="link-list">
-                        <li>
-                            <a href="#" target="_blank" rel="noopener">
-                                <span>📚 LMS – Lernplattform</span>
-                                <span class="badge">Täglich</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank" rel="noopener">
-                                <span>🧮 Noten- &amp; Prüfungsverwaltung</span>
-                                <span class="badge">Prüfungen</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank" rel="noopener">
-                                <span>📆 Stundenplan-Portal</span>
-                                <span class="badge">Live</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank" rel="noopener">
-                                <span>💼 HR &amp; Absenzen</span>
-                                <span class="badge">Personal</span>
-                            </a>
-                        </li>
-                    </ul>
-                </section>
-
-                <!-- Rechte Spalte -->
-                <section class="card" aria-labelledby="todayTitle">
-                    <div class="card-header">
-                        <h2 class="card-title" id="todayTitle">Heute an der Akademie</h2>
-                        <div class="card-tag" id="cardDayLabel">Heute</div>
-                    </div>
-
-                    <div class="hero-widget" aria-label="Tagesüberblick">
-                        <div class="hero-widget-head">
-                            <span id="heroGreetingShort">Guten Tag</span>
-                            <span class="hero-clock" id="heroClock">--:--</span>
-                        </div>
-                        <div>
-                            2 Lektionen, 1 Sitzung, 1 Prüfung heute.
-                        </div>
-
-                        <div>
-                            <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:0.4rem;">
-                                <span>Herbstsemester – Leistungsnachweise erfasst</span>
-                                <span>76&nbsp;%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <ul class="news-list" aria-label="News für Mitarbeitende">
-                        <li class="news-item">
-                            <div class="news-header">
-                                <div class="news-title">Neue Richtlinie für hybride Prüfungen</div>
-                                <div class="news-meta">Veröffentlicht: 18. Nov</div>
-                            </div>
-                            <div class="news-tags">Prüfungen · Dozierende</div>
-                        </li>
-
-                        <li class="news-item">
-                            <div class="news-header">
-                                <div class="news-title">Upgrade des WLANs auf dem Campus abgeschlossen</div>
-                                <div class="news-meta">Veröffentlicht: 15. Nov</div>
-                            </div>
-                            <div class="news-tags">Infrastruktur · IT</div>
-                        </li>
-
-                        <li class="news-item">
-                            <div class="news-header">
-                                <div class="news-title">Weiterbildungsbudget 2026 – Einreichung bis Ende Januar</div>
-                                <div class="news-meta">Veröffentlicht: 10. Nov</div>
-                            </div>
-                            <div class="news-tags">Weiterbildung · HR</div>
-                        </li>
-                    </ul>
-
-                    <div class="status-row">
-                        <strong>IT-Systemstatus:</strong>
-                        <br>
-                        <span class="status-dot"></span>Lernplattform · Betrieb normal<br>
-                        <span class="status-dot"></span>Microsoft 365 · Keine Störung<br>
-                        <span class="status-dot warn"></span>VPN · Wartung heute 21–23 Uhr
-                    </div>
-                </section>
-            </section>
-        </div>
-    </main>
-
-    <!-- ======= Footer ======= -->
-    <footer class="footer">
-        <div class="footer-inner">
-            <div>&copy; <span id="footerYear"></span> Akademie für Wirtschaft &amp; Informatik · Intern</div>
-            <div class="footer-links">
-                <a href="#">Datenschutz</a><span>·</span>
-                <a href="#">IT-Richtlinien</a><span>·</span>
-                <a href="#">Kontakt IT-Service</a>
-            </div>
-        </div>
-    </footer>
+    <p class="subtitle" style="margin-top: 16px;">
+        Hinweis: Dies ist nur eine Demo fuer die Logik, keine echte Anmeldung.
+    </p>
 </div>
 
-<!-- ========= JavaScript: Datum, Uhrzeit, Begrüssung, Theme Toggle ========= -->
-<script>
-    (function () {
-        const root = document.documentElement;
-        const themeToggle = document.getElementById("themeToggle");
-        const themeIcon = document.getElementById("themeIcon");
-        const themeLabel = document.getElementById("themeLabel");
+<!-- Toast-Container -->
+<div id="toast" class="toast"></div>
 
-        const headerDate = document.getElementById("headerDate");
-        const heroClock = document.getElementById("heroClock");
-        const heroGreetingLine = document.getElementById("heroGreetingLine");
-        const heroGreetingShort = document.getElementById("heroGreetingShort");
-        const cardDayLabel = document.getElementById("cardDayLabel");
-        const footerYear = document.getElementById("footerYear");
-
-        /* ---- Hilfsfunktion: Datum formatiert als „Donnerstag, 20. November 2025“ ---- */
-        function formatLongDate(date) {
-            return date.toLocaleDateString("de-CH", {
-                weekday: "long",
-                day: "2-digit",
-                month: "long",
-                year: "numeric"
-            });
-        }
-
-        /* ---- Uhrzeit + Begrüssung nach Tageszeit setzen ---- */
-        function updateClockAndGreeting() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, "0");
-            const minutes = String(now.getMinutes()).padStart(2, "0");
-            heroClock.textContent = hours + ":" + minutes;
-
-            let greeting = "Guten Tag";
-            if (now.getHours() < 11) greeting = "Guten Morgen";
-            else if (now.getHours() >= 17) greeting = "Guten Abend";
-
-            heroGreetingLine.textContent = greeting + ", Lucas";
-            heroGreetingShort.textContent = greeting;
-        }
-
-        /* ---- Theme aus localStorage oder System übernehmen ---- */
-        function applyStoredTheme() {
-            const stored = localStorage.getItem("intranet-theme");
-            if (stored === "light" || stored === "dark") {
-                root.setAttribute("data-theme", stored);
-            } else {
-                // Fallback: Systempräferenz
-                const prefersDark = window.matchMedia &&
-                    window.matchMedia("(prefers-color-scheme: dark)").matches;
-                root.setAttribute("data-theme", prefersDark ? "dark" : "light");
-            }
-            updateThemeToggleLabel();
-        }
-
-        /* ---- Button-Icon/Text für aktuelles Theme anpassen ---- */
-        function updateThemeToggleLabel() {
-            const mode = root.getAttribute("data-theme") || "dark";
-            if (mode === "dark") {
-                themeIcon.textContent = "🌙";
-                themeLabel.textContent = "Dark Mode";
-            } else {
-                themeIcon.textContent = "☀️";
-                themeLabel.textContent = "Light Mode";
-            }
-        }
-
-        /* ---- Theme wechseln und speichern ---- */
-        function toggleTheme() {
-            const current = root.getAttribute("data-theme") || "dark";
-            const next = current === "dark" ? "light" : "dark";
-            root.setAttribute("data-theme", next);
-            localStorage.setItem("intranet-theme", next);
-            updateThemeToggleLabel();
-        }
-
-        /* ---- Initiale Werte setzen ---- */
-        const now = new Date();
-        headerDate.textContent = formatLongDate(now);
-        cardDayLabel.textContent = "Heute";
-        footerYear.textContent = String(now.getFullYear());
-
-        applyStoredTheme();
-        updateClockAndGreeting();
-        setInterval(updateClockAndGreeting, 15 * 1000); // alle 15s aktualisieren
-
-        themeToggle.addEventListener("click", toggleTheme);
-    })();
-</script>
 </body>
 </html>
