@@ -5,7 +5,8 @@
     "kategorie": "Pralinen",
     "beschreibung": "Gemischte Pralinen, 16 Stueck.",
     "preis": 24.90,
-    "vegan": false
+    "vegan": false,
+    "image": "https://media.istockphoto.com/id/2178947813/photo/dubai-chocolate-bar-with-green-kadayif-and-peanut-butter-on-white-stone-table.jpg?s=2048x2048&w=is&k=20&c=zgfS98W9aZ2TdHNyCE6src4SRXS-JpA_dbHD7cRJ0DI="
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "kategorie": "Pralinen",
     "beschreibung": "Feine vegane Pralinen, 12 Stueck.",
     "preis": 26.50,
-    "vegan": true
+    "vegan": true,
+    "image": "https://media.istockphoto.com/id/965487714/photo/stack-of-milk-and-dark-chocolate-with-nuts-caramel-and-fruits-and-berries-on-wooden-background.jpg?s=2048x2048&w=is&k=20&c=eAQjKWRBvp0eiIr7ZmE497G3bG7kP2vameL9rtLWuFo="
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "kategorie": "Tafel",
     "beschreibung": "Edle Bitterschokolade mit 72% Kakao.",
     "preis": 4.90,
-    "vegan": true
+    "vegan": true,
+    "image": "https://images.unsplash.com/photo-YemxYB75xvI?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 4,
@@ -29,7 +32,8 @@
     "kategorie": "Tafel",
     "beschreibung": "Feine Milchschokolade, 100g.",
     "preis": 3.90,
-    "vegan": false
+    "vegan": false,
+    "image": "https://media.istockphoto.com/id/653112934/photo/chocolate-easter-bunny-and-eggs-on-rustic-background.jpg?s=2048x2048&w=is&k=20&c=mFKLJorSn9AxXq8s3Ch10zJAXqYSDgwNhCqsK0eNZoI="
   },
   {
     "id": 5,
@@ -37,7 +41,8 @@
     "kategorie": "Geschenkset",
     "beschreibung": "Kombination aus Pralinen, Tafeln und Truffes.",
     "preis": 49.90,
-    "vegan": false
+    "vegan": false,
+    "image": "https://images.unsplash.com/photo-dcPNZeSY3yk?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 6,
@@ -45,7 +50,8 @@
     "kategorie": "Truffes",
     "beschreibung": "Edle Truffes mit Marc-de-Champagne-Fuellung.",
     "preis": 18.50,
-    "vegan": false
+    "vegan": false,
+    "image": "https://images.unsplash.com/photo-7LKpstdOad0?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 7,
@@ -53,7 +59,8 @@
     "kategorie": "Tafel",
     "beschreibung": "Milchschokolade mit knusprigem Haselnuss-Krokant.",
     "preis": 4.50,
-    "vegan": false
+    "vegan": false,
+    "image": "https://images.unsplash.com/photo-kl95aDeGsew?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 8,
@@ -61,23 +68,26 @@
     "kategorie": "Tafel",
     "beschreibung": "Dunkle Schokolade mit fruchtigen Orangennoten.",
     "preis": 5.20,
-    "vegan": true
+    "vegan": true,
+    "image": "https://images.unsplash.com/photo-TzN2odwnesg?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 9,
     "name": "Winter Edition – Zimt Tafel",
-    "kategorie": "Tafel",
-    "beschreibung": "Limitierte Tafelschokolade mit Zimt und Gewürznoten.",
+    "kategorie": "Saison",
+    "beschreibung": "Limitierte Tafelschokolade mit Zimt und winterlichen Gewuerzen.",
     "preis": 5.90,
-    "vegan": false
+    "vegan": false,
+    "image": "https://images.unsplash.com/photo-MxjnYEqAfVA?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 10,
     "name": "Pralinenmischung Noir",
     "kategorie": "Pralinen",
-    "beschreibung": "Feine dunkle Pralinen für Liebhaber intensiver Schokolade.",
+    "beschreibung": "Dunkle Pralinen fuer Liebhaber intensiver Schokolade.",
     "preis": 22.40,
-    "vegan": true
+    "vegan": true,
+    "image": "https://images.unsplash.com/photo--hsUXEkoRKo?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 11,
@@ -85,15 +95,17 @@
     "kategorie": "Truffes",
     "beschreibung": "Handgerollte Caramel-Truffes mit Fleur de Sel.",
     "preis": 17.90,
-    "vegan": false
+    "vegan": false,
+    "image": "https://images.unsplash.com/photo-EA-rWr0Atew?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 12,
     "name": "Geschenkset Mini",
     "kategorie": "Geschenkset",
-    "beschreibung": "Kleine Geschenkbox für besondere Anlaesse.",
+    "beschreibung": "Kleine Geschenkbox fuer besondere Anlaesse.",
     "preis": 19.90,
-    "vegan": false
+    "vegan": false,
+    "image": "https://images.unsplash.com/photo-SAlVV13XgTo?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 13,
@@ -101,7 +113,8 @@
     "kategorie": "Tafel",
     "beschreibung": "Dunkle Schokolade mit gefriergetrockneten Himbeeren.",
     "preis": 4.70,
-    "vegan": true
+    "vegan": true,
+    "image": "https://images.unsplash.com/photo-jwUG4br8xcY?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 14,
@@ -109,7 +122,8 @@
     "kategorie": "Pralinen",
     "beschreibung": "Weiche Caramel-Pralinen mit Rahmfuellung.",
     "preis": 21.90,
-    "vegan": false
+    "vegan": false,
+    "image": "https://images.unsplash.com/photo-9XIaxVQ8njs?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 15,
@@ -117,15 +131,17 @@
     "kategorie": "Saison",
     "beschreibung": "Handgegossener Schokoladenhase aus Vollmilch.",
     "preis": 12.50,
-    "vegan": false
+    "vegan": false,
+    "image": "https://images.unsplash.com/photo-dcPNZeSY3yk?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 16,
     "name": "Weihnachtsstern Zartbitter",
     "kategorie": "Saison",
-    "beschreibung": "Weihnachtsstern aus dunkler Schokolade.",
+    "beschreibung": "Weihnachtliche Sternform aus dunkler Schokolade.",
     "preis": 9.90,
-    "vegan": true
+    "vegan": true,
+    "image": "https://images.unsplash.com/photo-MxjnYEqAfVA?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 17,
@@ -133,7 +149,8 @@
     "kategorie": "Tafel",
     "beschreibung": "Zartbitterschokolade mit feiner Kaffeenote.",
     "preis": 5.50,
-    "vegan": true
+    "vegan": true,
+    "image": "https://images.unsplash.com/photo-I1aLLjfd9D4?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 18,
@@ -141,7 +158,8 @@
     "kategorie": "Truffes",
     "beschreibung": "Truffes mit cremiger Baileysfuellung.",
     "preis": 18.90,
-    "vegan": false
+    "vegan": false,
+    "image": "https://images.unsplash.com/photo-7LKpstdOad0?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 19,
@@ -149,7 +167,8 @@
     "kategorie": "Pralinen",
     "beschreibung": "Pralinen mit Haselnuss-, Pistazien- und Mandelfuellung.",
     "preis": 23.90,
-    "vegan": false
+    "vegan": false,
+    "image": "https://images.unsplash.com/photo-Y6mHIGLPM-M?auto=format&fit=crop&w=900&q=80"
   },
   {
     "id": 20,
@@ -157,6 +176,43 @@
     "kategorie": "Tafel",
     "beschreibung": "Herb-schokoladige Tafel mit einer Note von Chili.",
     "preis": 5.30,
-    "vegan": true
+    "vegan": true,
+    "image": "https://images.unsplash.com/photo-KALs710eNrs?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": 21,
+    "name": "Mini Tafeln Mix",
+    "kategorie": "Tafel",
+    "beschreibung": "Kleinformatige Tafeln in verschiedenen Sorten zum Probieren.",
+    "preis": 7.90,
+    "vegan": false,
+    "image": "https://images.unsplash.com/photo-_8Pq1QtuTcQ?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": 22,
+    "name": "Sommer-Frucht Pralinen",
+    "kategorie": "Pralinen",
+    "beschreibung": "Leichte Pralinen mit Zitronen- und Beerenfuellungen.",
+    "preis": 25.50,
+    "vegan": true,
+    "image": "https://images.unsplash.com/photo-uvxmcdMv4?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": 23,
+    "name": "Bio Tafelschokolade 85%",
+    "kategorie": "Tafel",
+    "beschreibung": "Intensive Bio-Bitterschokolade mit 85% Kakao.",
+    "preis": 5.90,
+    "vegan": true,
+    "image": "https://images.unsplash.com/photo-EA-rWr0Atew?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    "id": 24,
+    "name": "Premium Geschenkbox Selection",
+    "kategorie": "Geschenkset",
+    "beschreibung": "Grosse Auswahl an handgemachten Chocadies-Spezialitaeten.",
+    "preis": 69.00,
+    "vegan": false,
+    "image": "https://images.unsplash.com/photo-dcPNZeSY3yk?auto=format&fit=crop&w=900&q=80"
   }
 ]

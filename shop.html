@@ -5,67 +5,157 @@
     <title>Chocolatier Chocadies – Shop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="styles.css?v=1">
+    <!-- Tailwind über CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Shop-Logik -->
     <script src="shop.js" defer></script>
 </head>
-<body>
+<body class="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100">
 
-<div class="shop-page">
-    <header class="shop-header">
-        <h1>Chocolatier Chocadies – Shop</h1>
-        <p>Produktuebersicht aus einer JSON-Datei mit Filterfunktion.</p>
-        <a href="index.html" class="link-button">Abmelden / Zurueck zum Login</a>
-    </header>
-
-    <!-- Filterbereich -->
-    <section class="filter-bar">
-        <div class="filter-item">
-            <label for="searchInput">Suche (Name oder Beschreibung)</label>
-            <input type="text" id="searchInput" placeholder="z. B. Praline, Tafel, Geschenk">
+<!-- Header mit Abmelden + Warenkorb -->
+<header class="border-b border-amber-200 bg-white/70 backdrop-blur">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div>
+            <h1 class="text-xl font-semibold text-slate-900 flex items-center gap-2">
+                <span class="text-2xl">🍫</span>
+                <span>Chocolatier Chocadies – Shop</span>
+            </h1>
+            <p class="text-xs text-slate-500">
+                Produkte aus JSON, Filter in Echtzeit
+            </p>
         </div>
 
-        <div class="filter-item">
-            <label for="categorySelect">Kategorie</label>
-            <select id="categorySelect">
-                <option value="alle">Alle</option>
-                <option value="Pralinen">Pralinen</option>
-                <option value="Tafel">Tafel</option>
-                <option value="Geschenkset">Geschenkset</option>
-            </select>
+        <div class="flex items-center gap-3">
+            <a
+                href="index.html"
+                class="inline-flex items-center rounded-full border border-amber-300 bg-white px-3 py-1.5 text-xs font-medium text-amber-800 shadow-sm hover:bg-amber-50"
+            >
+                Abmelden
+            </a>
+
+            <!-- Warenkorb-Button -->
+            <button
+                id="cartButton"
+                type="button"
+                class="inline-flex items-center rounded-full border border-amber-300 bg-white px-3 py-1.5 text-xs font-medium text-amber-800 shadow-sm hover:bg-amber-50"
+            >
+                <span class="mr-1 text-base">🛒</span>
+                
+                <span
+                    id="cartCount"
+                    class="ml-2 inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-white/90 px-1 text-[10px] font-semibold text-amber-700"
+                >
+                    0
+                </span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Hauptbereich -->
+<main class="max-w-6xl mx-auto px-4 py-6">
+    <!-- Filterleiste -->
+    <section class="bg-white/80 backdrop-blur rounded-2xl shadow-sm border border-amber-100 p-4 mb-6">
+        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div class="flex-1">
+                <label for="searchInput" class="block text-xs font-medium text-slate-600">
+                    Suche (Name, Beschreibung, Kategorie)
+                </label>
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="z. B. Praline, Tafel, Geschenk, Saison..."
+                    class="mt-1 block w-full rounded-lg border border-slate-200 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                >
+            </div>
+
+            <div class="w-full md:w-52">
+                <label for="categorySelect" class="block text-xs font-medium text-slate-600">
+                    Kategorie
+                </label>
+                <select
+                    id="categorySelect"
+                    class="mt-1 block w-full rounded-lg border border-slate-200 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                >
+                    <option value="alle">Alle Kategorien</option>
+                    <option value="Pralinen">Pralinen</option>
+                    <option value="Tafel">Tafel</option>
+                    <option value="Geschenkset">Geschenkset</option>
+                    <option value="Truffes">Truffes</option>
+                    <option value="Saison">Saison</option>
+                </select>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <input
+                    type="checkbox"
+                    id="veganOnly"
+                    class="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+                >
+                <label for="veganOnly" class="text-xs text-slate-600">
+                    Nur vegane Produkte
+                </label>
+            </div>
         </div>
 
-        <div class="filter-item filter-checkbox">
-            <label>
-                <input type="checkbox" id="veganOnly">
-                Nur vegane Produkte
-            </label>
-        </div>
+        <p id="statusText" class="mt-3 text-xs text-slate-500">
+            Produkte werden geladen...
+        </p>
     </section>
 
-    <!-- Statusanzeige -->
-    <p id="statusText" class="status-text">Produkte werden geladen ...</p>
+    <!-- Produkte als Cards -->
+    <section id="productGrid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Cards werden via shop.js eingefuegt -->
+    </section>
+</main>
 
-    <!-- Produkttabelle -->
-    <main>
-        <table class="product-table">
-            <thead>
-                <tr>
-                    <th>Produktname</th>
-                    <th>Kategorie</th>
-                    <th>Beschreibung</th>
-                    <th>Preis</th>
-                    <th>Vegan</th>
-                </tr>
-            </thead>
-            <tbody id="productTableBody">
-                <!-- Zeilen werden durch shop.js aus products.json eingefuegt -->
-            </tbody>
-        </table>
-    </main>
+<footer class="mt-8 border-t border-amber-200 bg-white/60 backdrop-blur">
+    <div class="max-w-6xl mx-auto px-4 py-3 text-xs text-slate-500 text-center">
+        Dies ist eine Demo-Seite ohne echte Bestellfunktion.
+    </div>
+</footer>
 
-    <footer class="shop-footer">
-        <p>Hinweis: Dies ist nur eine Demo-Seite ohne echte Bestellfunktion.</p>
-    </footer>
+<!-- Warenkorb-Overlay -->
+<div
+    id="cartOverlay"
+    class="fixed inset-0 z-30 hidden items-center justify-center bg-black/40 backdrop-blur-sm"
+>
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full mx-4 overflow-hidden">
+        <div class="flex items-center justify-between px-4 py-3 border-b border-slate-100">
+            <h2 class="text-sm font-semibold text-slate-900 flex items-center gap-2">
+                <span class="text-lg">🛒</span>
+                <span>Warenkorb</span>
+            </h2>
+            <button
+                id="cartClose"
+                type="button"
+                class="text-xs text-slate-500 hover:text-slate-800"
+            >
+                Schliessen ✕
+            </button>
+        </div>
+
+        <div class="max-h-80 overflow-y-auto px-4 py-3" id="cartItems">
+            <!-- Warenkorb-Items werden via shop.js eingefuegt -->
+        </div>
+
+        <div class="border-t border-slate-100 px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div class="text-xs text-slate-500">
+                Gesamtbetrag:
+                <span id="cartTotal" class="text-sm font-semibold text-amber-800 ml-1">
+                    CHF 0.00
+                </span>
+            </div>
+            <button
+                id="cartPayButton"
+                type="button"
+                class="inline-flex items-center justify-center rounded-full bg-amber-600 px-4 py-1.5 text-xs font-medium text-white shadow hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-1"
+            >
+                💳 Jetzt bezahlen (Demo)
+            </button>
+        </div>        
+    </div>
 </div>
 
 </body>
